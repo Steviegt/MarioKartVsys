@@ -11,6 +11,9 @@ import RootController from "./controller/root.controller.js";
 // Verzeichnisnamen der Quellcodedatei ermitteln
 import path from "path";
 import { fileURLToPath } from "url";
+import PlayerController from "./controller/player.controller.js";
+import TrackController from "./controller/track.controller.js";
+import HighscoreController from "./controller/highscore.controller.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /* =============================================================================
@@ -92,13 +95,17 @@ server.use(OpenApiEnforcerMiddleware(openApiEnforcer));
 // HTTP-Controller registrieren
 //// TODO: Weitere Controller-Klassen hinzufügen ////
 new RootController(server, "/");
+new PlayerController(server, "/player");
+new TrackController(server, "/track");
+new HighscoreController(server, "/highscore");
+
 
 // Server tatsächlich starten
 server.listen(config.port, config.host, function() {
     //// TODO: Konsolenausgabe anpassen (Name des Services usw.) ////
     console.log();
     console.log("=============");
-    console.log("MyApp-Server");
+    console.log("Mario Kart Highscore");
     console.log("=============");
     console.log();
     console.log("Ausführung mit folgender Konfiguration:");

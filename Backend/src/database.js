@@ -33,21 +33,57 @@ class DatabaseFactory {
     async _createDemoData() {
         //// TODO: Methode anpassen, um zur eigenen App passende Demodaten anzulegen ////
         //// oder die Methode ggf. einfach löschen und ihren Aufruf oben entfernen.  ////
-        let examples = this.database.collection("example");
+        let tracks = this.database.collection("tracks");
 
-        if (await examples.estimatedDocumentCount() === 0) {
-            examples.insertMany([
+        if (await tracks.estimatedDocumentCount() === 0) {
+            tracks.insertMany([
                 {
-                    title: "Cloud Native Architecture and Design",
-                    author: "Shivakumar R Goniwada",
-                    publisher: "Apress",
-                    year: 2022,
+                    track_title: "Rainbow Road",
+                    game_version: "Mario Kart 8 deluxe"
                 },
                 {
-                    title: "Machine Learning Kompakt",
-                    author: "Andriy Burkov",
-                    publisher: "mitp",
-                    year: 2019,
+                    track_title: "Wario Stadion",
+                    game_version: "Mario Kart DS"
+                },
+            ]);
+        }
+
+        let player = this.database.collection("player");
+
+        if (await player.estimatedDocumentCount() === 0) {
+            player.insertMany([
+                {
+                    name: "Xena Raquet",
+                    skill_level: "Beginner"
+                },
+                {
+                    name: "Stefan Geiselhart",
+                    skill_level: "Medium"
+                },{
+                    name: "Vinzent von Benthen",
+                    skill_level: "Pro"
+                },
+            ]);
+        }
+
+        let highscore = this.database.collection("highscore");
+
+        if (await highscore.estimatedDocumentCount() === 0) {
+            highscore.insertMany([
+                {
+                    name: "Xena Raquet",
+                    track: "Rainbow Road",
+                    time: "24:00:00"
+                },
+                {
+                    name: "Vinzent von Benthen",
+                    track: "Rainbow Road",
+                    time: "00:00:01"
+                },
+                {
+                    name: "Stefan Geiselhart",
+                    track: "Wario Stadion",
+                    time: "00:02:30"
                 },
             ]);
         }

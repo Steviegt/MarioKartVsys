@@ -37,6 +37,11 @@ export default class RootController {
             //     query: {url: "/example", method: "GET", queryParams: ["search"]},
             //     create: {url: "/example", method: "POST"},
             // }
+            {
+                _name: "player",
+                query: {url: "/player", method: "GET", queryParams: ["search","name","skill_level"]},
+                create: {url: "/player", method: "POST"},
+            }
         ]);
 
         next();
