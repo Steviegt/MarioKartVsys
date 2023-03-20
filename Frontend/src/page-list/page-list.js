@@ -60,7 +60,7 @@ export default class PageList extends Page {
 
             html = html.replace("$ID$", dataset._id);
             html = html.replace("$NAME", dataset.name);
-            html = html.replace("$SKILL_LEVEL$", dataset.skill_level);
+            html = html.replace("$SKILL_LEVEL", dataset.skill_level);
 
 
             // Element in die Liste einfügen
