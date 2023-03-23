@@ -13,7 +13,7 @@ export default class TrackService {
      * Konstruktor.
      */
     constructor() {
-        this._track = DatabaseFactory.database.collection("track");
+        this._track = DatabaseFactory.database.collection("tracks");
     }
 
     /**

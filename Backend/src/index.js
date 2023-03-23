@@ -7,13 +7,14 @@ import OpenApiEnforcerMiddleware from "@dschulmeis/restify-openapi-enforcer-midd
 //// TODO: Weitere Controller-Klassen importieren ////
 import DatabaseFactory from "./database.js";
 import RootController from "./controller/root.controller.js";
+import PlayerController from "./controller/player.controller.js";
+import TrackController from "./controller/track.controller.js";
+import HighscoreController from "./controller/highscore.controller.js";
 
 // Verzeichnisnamen der Quellcodedatei ermitteln
 import path from "path";
 import { fileURLToPath } from "url";
-import PlayerController from "./controller/player.controller.js";
-import TrackController from "./controller/track.controller.js";
-import HighscoreController from "./controller/highscore.controller.js";
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /* =============================================================================

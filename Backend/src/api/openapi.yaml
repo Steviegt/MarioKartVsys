@@ -1,66 +1,382 @@
-openapi: 3.0.0
+---
+openapi: 3.0.2
 info:
-  title: MyAPP
-  description: "__ TODO: Diese Datei durch eine eigene API-Spezifikation ersetzen. __"
-  contact:
-    name: Dennis Schulmeister-Zimolong
-    url: https://www.wpvs.de
-    email: dhbw@windows3.de
-  license:
-    name: CC-BY-4.0
-    url: https://creativecommons.org/licenses/by/4.0/deed.de
-  version: "1.0"
-servers:
-- url: http://localhost:3000
-tags:
-- name: Beispiel
+  title: Mario Kart Highscores
+  version: 1.0.0
+  description: |-
+    Dies ist eine API zur Verwaltung von Mario-Kart Highscores und soll folgende Möglichkeiten bieten:
+    -Login des Benutzers
+    -Erfassung des Highscores (Bestehend aus Strecke und Zeit)
+    -Anzeigen des Scoreboards
 paths:
-  /:
+  /highscore:
+    summary: Path used to manage the list of highscores.
+    description: "The REST endpoint/path used to list and create zero or more `highscore`\
+      \ entities.  This path contains a `GET` and `POST` operation to perform the\
+      \ list and create tasks, respectively."
     get:
-      tags:
-      - Index
-      summary: Wurzeladresse des Webservices
-      description: Liefert eine HATEOAS-Übersicht aller collections
-      operationId: index
       responses:
         "200":
-          description: OK
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/HATEOAS_Collection'
-                x-content-type: application/json
-
+                  $ref: '#/components/schemas/highscore'
+          description: Successful response - returns an array of `highscore` entities.
+      operationId: gethighscores
+      summary: List All highscores
+      description: Gets a list of all `highscore` entities.
+    post:
+      requestBody:
+        description: A new `highscore` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/highscore'
+        required: true
+      responses:
+        "201":
+          description: Successful response.
+      operationId: createhighscore
+      summary: Create a highscore
+      description: Creates a new instance of a `highscore`.
+    patch:
+      requestBody:
+        description: Zu ändernde Fehlder
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/highscore'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/highscore'
+          description: OK
+    parameters:
+    - name: name
+      description: Name des Spielers
+      schema:
+        type: string
+      in: query
+    - name: time
+      description: Zeit die gbraucht wurde
+      schema:
+        format: date-time
+        type: string
+      in: query
+    - name: track_titel
+      description: Name der Strecke
+      schema:
+        type: string
+      in: query
+  /highscore/{highscoreId}:
+    summary: Path used to manage a single highscore.
+    description: "The REST endpoint/path used to get, update, and delete single instances\
+      \ of an `highscore`.  This path contains `GET`, `PUT`, and `DELETE` operations\
+      \ used to perform the get, update, and delete tasks, respectively."
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/highscore'
+          description: Successful response - returns a single `highscore`.
+      operationId: gethighscore
+      summary: Get a highscore
+      description: Gets the details of a single instance of a `highscore`.
+    put:
+      requestBody:
+        description: Updated `highscore` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/highscore'
+        required: true
+      responses:
+        "202":
+          description: Successful response.
+      operationId: updatehighscore
+      summary: Update a highscore
+      description: Updates an existing `highscore`.
+    delete:
+      responses:
+        "204":
+          description: Successful response.
+      operationId: deletehighscore
+      summary: Delete a highscore
+      description: Deletes an existing `highscore`.
+    parameters:
+    - name: highscoreId
+      description: A unique identifier for a `highscore`.
+      schema:
+        type: string
+      in: path
+      required: true
+  /player:
+    summary: Path used to manage the list of players.
+    description: "Hier können Spieler gesucht, aufgelistet und angelegt werden."
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/player'
+          description: Successful response - returns an array of `player` entities.
+      operationId: getplayers
+      summary: List All players
+      description: Gets a list of all `player` entities.
+    post:
+      requestBody:
+        description: A new `player` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/player'
+        required: true
+      responses:
+        "201":
+          description: Successful response.
+      operationId: createplayer
+      summary: Create a player
+      description: Creates a new instance of a `player`.
+    patch:
+      requestBody:
+        description: Zu ändernde Felder
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/player'
+      responses:
+        "200":
+          description: OK
+    parameters:
+    - name: name
+      description: Name des Spielers
+      schema:
+        type: string
+      in: query
+    - name: skill_level
+      description: Fähigkeiten des Spielers
+      schema:
+        type: string
+      in: query
+      required: false
+  /player/{playerId}:
+    summary: Path used to manage a single player.
+    description: "The REST endpoint/path used to get, update, and delete single instances\
+      \ of an `player`.  This path contains `GET`, `PUT`, and `DELETE` operations\
+      \ used to perform the get, update, and delete tasks, respectively."
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/player'
+          description: Successful response - returns a single `player`.
+      operationId: getplayer
+      summary: Get a player
+      description: Gets the details of a single instance of a `player`.
+    put:
+      requestBody:
+        description: Updated `player` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/player'
+        required: true
+      responses:
+        "202":
+          description: Successful response.
+      operationId: updateplayer
+      summary: Update a player
+      description: Updates an existing `player`.
+    delete:
+      responses:
+        "204":
+          description: Successful response.
+      operationId: deleteplayer
+      summary: Delete a player
+      description: Deletes an existing `player`.
+    patch:
+      requestBody:
+        description: Zu ändernde Felder
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/player'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/player'
+          description: OK
+    parameters:
+    - name: playerId
+      description: A unique identifier for a `player`.
+      schema:
+        type: string
+      in: path
+      required: true
+  /track:
+    summary: Path used to manage the list of tracks.
+    description: "The REST endpoint/path used to list and create zero or more `track`\
+      \ entities.  This path contains a `GET` and `POST` operation to perform the\
+      \ list and create tasks, respectively."
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/track'
+          description: Successful response - returns an array of `track` entities.
+      operationId: gettracks
+      summary: List All tracks
+      description: Gets a list of all `track` entities.
+    post:
+      requestBody:
+        description: A new `track` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/track'
+        required: true
+      responses:
+        "201":
+          description: Successful response.
+      operationId: createtrack
+      summary: Create a track
+      description: Creates a new instance of a `track`.
+    patch:
+      requestBody:
+        description: Zu ändernde Felder
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/track'
+      responses:
+        "200":
+          description: OK
+    parameters:
+    - name: game_version
+      description: Version auf dem es die Strecke gibt
+      schema:
+        type: string
+      in: query
+    - name: track_titel
+      description: Name der Strecke
+      schema:
+        type: string
+      in: query
+  /track/{trackId}:
+    summary: Path used to manage a single track.
+    description: "The REST endpoint/path used to get, update, and delete single instances\
+      \ of an `track`.  This path contains `GET`, `PUT`, and `DELETE` operations used\
+      \ to perform the get, update, and delete tasks, respectively."
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/track'
+          description: Successful response - returns a single `track`.
+      operationId: gettrack
+      summary: Get a track
+      description: Gets the details of a single instance of a `track`.
+    put:
+      requestBody:
+        description: Updated `track` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/track'
+        required: true
+      responses:
+        "202":
+          description: Successful response.
+      operationId: updatetrack
+      summary: Update a track
+      description: Updates an existing `track`.
+    delete:
+      responses:
+        "204":
+          description: Successful response.
+      operationId: deletetrack
+      summary: Delete a track
+      description: Deletes an existing `track`.
+    parameters:
+    - name: trackId
+      description: A unique identifier for a `track`.
+      schema:
+        type: string
+      in: path
+      required: true
 components:
   schemas:
-    HATEOAS_Collection:
-      title: HATEOAS-Links einer Collection
+    player:
+      title: Root Type for player
+      description: Spieler
       type: object
       properties:
-        _name:
+        name:
           type: string
-        query:
-          $ref: '#/components/schemas/HATEOAS_Link'
-        create:
-          $ref: '#/components/schemas/HATEOAS_Link'
-
-    HATEOAS_Resource:
-      title: HATEOAS-Links einer Resource
+        skill_level:
+          type: string
+        _links:
+          $ref: '#/components/schemas/PLAYER_Resource'
+          description: ""
+      example:
+        name: Vinzent von Benthen
+        skill_level: Pro
+    track:
+      title: Root Type for track
+      description: Strecke
       type: object
       properties:
-        read:
-          $ref: '#/components/schemas/HATEOAS_Link'
-        update:
-          $ref: '#/components/schemas/HATEOAS_Link'
-        patch:
-          $ref: '#/components/schemas/HATEOAS_Link'
-        delete:
-          $ref: '#/components/schemas/HATEOAS_Link'
-
-    HATEOAS_Link:
-      title: HATEOAS-Link
+        track_title:
+          type: string
+        game_version:
+          type: string
+        _link:
+          $ref: '#/components/schemas/TRACK_Resource'
+          description: ""
+      example:
+        track_title: Rainbow Road
+        game_version: Mario Kart 8 deluxe
+    highscore:
+      title: Root Type for highscore
+      description: Bestzeit einer bestimmten Strecke
+      type: object
+      properties:
+        name:
+          type: string
+        time:
+          format: date-time
+          type: string
+        _links:
+          $ref: '#/components/schemas/HIGHSCORE_Resource'
+          description: ""
+        track_titel:
+          type: string
+      example:
+        name: Vinzent von Benthen
+        track: Rainbow Road
+        time: 00:01:03
+    PLAYER_Link:
+      title: Root Type for HATEOAS_Link
+      description: HATEOAS-Link
       type: object
       properties:
         url:
@@ -71,5 +387,154 @@ components:
           type: array
           items:
             type: string
-
-  securitySchemes: {}
+      example:
+        url: /player
+        method: GET
+        query_params:
+        - name
+        - skill_level
+    PLAYER_Collection:
+      title: Root Type for HATEOAS_Collection
+      description: HATEOAS-Link einer Collection
+      type: object
+      properties:
+        _name:
+          type: string
+        query:
+          $ref: '#/components/schemas/PLAYER_Link'
+        create:
+          $ref: '#/components/schemas/PLAYER_Link'
+      example:
+        _name: player
+        query: ""
+        create: ""
+    HIGHSCORE_Link:
+      title: Root Type for HIGHSCORE_Link
+      description: HATEOAS-Link für Highscore
+      type: object
+      properties:
+        url:
+          type: string
+        method:
+          type: string
+        query_params:
+          type: array
+          items:
+            type: string
+      example:
+        url: /highscore
+        method: GET
+        query_params:
+        - name
+        - track
+        - time
+    TRACK_Link:
+      title: Root Type for TRACK_Link
+      description: HATEOAS-Link für Track
+      type: object
+      properties:
+        url:
+          type: string
+        method:
+          type: string
+        query_params:
+          type: array
+          items:
+            type: string
+      example:
+        url: /track
+        method: GET
+        query_params:
+        - track_title
+        - game_version
+    PLAYER_Resource:
+      title: Root Type for HATEOAS_Resource
+      description: HATEOAS_Link einer Resource
+      type: object
+      properties:
+        read:
+          $ref: '#/components/schemas/PLAYER_Link'
+        update:
+          $ref: '#/components/schemas/PLAYER_Link'
+        patch:
+          $ref: '#/components/schemas/PLAYER_Link'
+        delete:
+          $ref: '#/components/schemas/PLAYER_Link'
+      example:
+        read: ""
+        update: ""
+        patch: ""
+        delete: ""
+    HIGHSCORE_Resource:
+      title: Root Type for HIGHSCORE_Resource
+      description: ""
+      type: object
+      properties:
+        read:
+          $ref: '#/components/schemas/HIGHSCORE_Link'
+        update:
+          $ref: '#/components/schemas/HIGHSCORE_Link'
+        patch:
+          $ref: '#/components/schemas/HIGHSCORE_Link'
+        delete:
+          $ref: '#/components/schemas/HIGHSCORE_Link'
+      example:
+        read: ""
+        update: ""
+        patch: ""
+        delete: ""
+    TRACK_Resource:
+      title: Root Type for TRACK_Resource
+      description: ""
+      type: object
+      properties:
+        read:
+          $ref: '#/components/schemas/TRACK_Link'
+        update:
+          $ref: '#/components/schemas/TRACK_Link'
+        patch:
+          $ref: '#/components/schemas/TRACK_Link'
+        delete:
+          $ref: '#/components/schemas/TRACK_Link'
+      example:
+        read: ""
+        update: ""
+        patch: ""
+        delete: ""
+    TRACK_Collection:
+      title: Root Type for TRACK_Collection
+      description: ""
+      type: object
+      properties:
+        _name:
+          type: string
+        query:
+          $ref: '#/components/schemas/TRACK_Link'
+        create:
+          $ref: '#/components/schemas/TRACK_Link'
+      example:
+        _name: track
+        query: ""
+        create: ""
+    HIGHSCORE_Collection:
+      title: Root Type for HIGHSCORE_Collection
+      description: ""
+      type: object
+      properties:
+        _name:
+          type: string
+        query:
+          $ref: '#/components/schemas/HIGHSCORE_Link'
+        create:
+          $ref: '#/components/schemas/HIGHSCORE_Link'
+      example:
+        _name: highscore
+        query: ""
+        create: ""
+tags:
+- name: player
+  description: Spieler
+- name: track
+  description: Rennstrecke
+- name: highscore
+  description: bestes Ergebnis
