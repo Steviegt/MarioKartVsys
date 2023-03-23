@@ -23,14 +23,24 @@ class App {
         // Single Page Router zur Steuerung der sichtbaren Inhalte
         //// TODO: Routing-Regeln anpassen und ggf. neue Methoden anlegen ////
         this.router = new Router([
-            {
+            /*{
                 url: "^/$",
-                show: () => this._gotoList()
+                show: () => this._gotoListPlayer()
             },
+            */
             //// TODO: Eigene Routing-Regeln hier in der Mitte einfügen ////
-            {
+            /*{
                 url: ".*",
-                show: () => this._gotoList()
+                show: () => this._gotoListPlayer()
+            },
+            */
+            {
+                url: "^/player/(.*)$",
+                show: () => this._gotoListPlayer()
+            },
+            {
+                url: "^/tracks/(.*)$",
+                show: () => this._gotoListTracks()
             },
         ]);
 
@@ -61,14 +71,27 @@ class App {
     /**
      * Übersichtsseite anzeigen. Wird vom Single Page Router aufgerufen.
      */
-    async _gotoList() {
+    async _gotoListPlayer() {
         try {
             // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
-            let {default: PageList} = await import("./page-list/page-list.js");
+            let {default: PageList} = await import("./page-list-player/page-list-player.js");
 
             let page = new PageList(this);
             await page.init();
-            this._showPage(page, "list");
+            this._showPage(page, "list-player");
+        } catch (ex) {
+            this.showException(ex);
+        }
+    }
+
+    async _gotoListTracks() {
+        try {
+            // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+            let {default: PageList} = await import("./page-list-tracks/page-list-tracks.js");
+
+            let page = new PageList(this);
+            await page.init();
+            this._showPage(page, "list-tracks");
         } catch (ex) {
             this.showException(ex);
         }

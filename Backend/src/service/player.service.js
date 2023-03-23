@@ -50,7 +50,7 @@ export default class PlayerService {
             skill_level:  player.skill_level  || "",
         };
 
-        let result = await this._player.insertOne(newTrack);
+        let result = await this._player.insertOne(newPlayer);
         return await this._player.findOne({_id: result.insertedId});
     }
 

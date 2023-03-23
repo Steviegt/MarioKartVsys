@@ -73,17 +73,17 @@ class DatabaseFactory {
                 {
                     name: "Xena Raquet",
                     track: "Rainbow Road",
-                    time: "24:00:00"
+                    time: "24h 00m 00s"
                 },
                 {
                     name: "Vinzent von Benthen",
                     track: "Rainbow Road",
-                    time: "00:00:01"
+                    time: "00h 00m 01s"
                 },
                 {
                     name: "Stefan Geiselhart",
                     track: "Wario Stadion",
-                    time: "00:02:30"
+                    time: "00h 02m 30s"
                 },
             ]);
         }

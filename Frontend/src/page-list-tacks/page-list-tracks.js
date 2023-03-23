@@ -1,7 +1,7 @@
 "use strict";
 
 import Page from "../page.js";
-import HtmlTemplate from "./page-list.html";
+import HtmlTemplate from "/page-list-tacks/page-list-tracks.html";
 
 /**
  * Klasse PageList: Stellt die Listenübersicht zur Verfügung
@@ -39,7 +39,7 @@ export default class PageList extends Page {
         this._title = "Übersicht";
 
         // Platzhalter anzeigen, wenn noch keine Daten vorhanden sind
-        let data = await this._app.backend.fetch("GET", "/player");
+        let data = await this._app.backend.fetch("GET", "/track");
         this._emptyMessageElement = this._mainElement.querySelector(".empty-placeholder");
 
         if (data.length) {
@@ -59,8 +59,8 @@ export default class PageList extends Page {
             let html = templateHtml;
 
             html = html.replace("$ID$", dataset._id);
-            html = html.replace("$NAME", dataset.name);
-            html = html.replace("$SKILL_LEVEL", dataset.skill_level);
+            html = html.replace("$TITLE", dataset.name);
+            html = html.replace("$GAME_VERSION", dataset.skill_level);
 
 
             // Element in die Liste einfügen

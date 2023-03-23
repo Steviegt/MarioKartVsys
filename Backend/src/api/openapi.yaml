@@ -43,7 +43,7 @@ paths:
       description: Creates a new instance of a `highscore`.
     patch:
       requestBody:
-        description: Zu ändernde Fehlder
+        description: Zu ändernde Felder
         content:
           application/json:
             schema:
@@ -62,9 +62,8 @@ paths:
         type: string
       in: query
     - name: time
-      description: Zeit die gbraucht wurde
+      description: Zeit die gebraucht wurde
       schema:
-        format: date-time
         type: string
       in: query
     - name: track_titel
@@ -363,7 +362,6 @@ components:
         name:
           type: string
         time:
-          format: date-time
           type: string
         _links:
           $ref: '#/components/schemas/HIGHSCORE_Resource'
