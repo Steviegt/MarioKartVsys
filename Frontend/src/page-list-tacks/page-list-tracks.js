@@ -1,7 +1,7 @@
 "use strict";
 
 import Page from "../page.js";
-import HtmlTemplate from "/page-list-tacks/page-list-tracks.html";
+import HtmlTemplate from "/page-list-tracks/page-list-tracks.html";
 
 /**
  * Klasse PageList: Stellt die Listenübersicht zur Verfügung
