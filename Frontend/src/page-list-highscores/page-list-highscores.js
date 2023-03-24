@@ -1,7 +1,7 @@
 "use strict";
 
 import Page from "../page.js";
-import HtmlTemplate from "./page-list-player.html";
+import HtmlTemplate from "./page-list-highscores.html";
 
 /**
  * Klasse PageList: Stellt die Listenübersicht zur Verfügung
@@ -39,8 +39,10 @@ export default class PageList extends Page {
         this._title = "Übersicht";
 
         // Platzhalter anzeigen, wenn noch keine Daten vorhanden sind
-        let data = await this._app.backend.fetch("GET", "/player");
+        let data = await this._app.backend.fetch("GET", "/highscore");
         this._emptyMessageElement = this._mainElement.querySelector(".empty-placeholder");
+
+
 
         if (data.length) {
             this._emptyMessageElement.classList.add("hidden");
@@ -60,7 +62,8 @@ export default class PageList extends Page {
 
             html = html.replace("$ID$", dataset._id);
             html = html.replace("$NAME", dataset.name);
-            html = html.replace("$SKILL_LEVEL", dataset.skill_level);
+            html = html.replace("$TRACK_TITLE", dataset.track);
+            html = html.replace("$TIME", dataset.time);
 
 
             // Element in die Liste einfügen
@@ -71,10 +74,8 @@ export default class PageList extends Page {
             olElement.appendChild(liElement);
 
             // Event Handler registrieren
-            liElement.querySelector(".action.edit").addEventListener("click", () => location.hash = `#/edit-player/${dataset._id}`);
+            liElement.querySelector(".action.edit").addEventListener("click", () => location.hash = `#/edit-highscore/${dataset._id}`);
             liElement.querySelector(".action.delete").addEventListener("click", () => this._askDelete(dataset._id));
-            liElement.querySelector(".action.showDetails").addEventListener("click", () => location.hash = `#/highscore-by-player/${dataset.name}`);
-
         }
     }
 
@@ -91,7 +92,7 @@ export default class PageList extends Page {
 
         // Datensatz löschen
         try {
-            this._app.backend.fetch("DELETE", `/player/${id}`);
+            this._app.backend.fetch("DELETE", `/highscore/${id}`);
         } catch (ex) {
             this._app.showException(ex);
             return;

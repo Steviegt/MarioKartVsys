@@ -75,7 +75,7 @@ export default class HighscoreService {
      * @param {[type]} track Zu speichernde Adressdaten
      * @return {Promise} Gespeicherte Adressdaten oder undefined
      */
-    async update(id, track) {
+    async update(id, highscore) {
         let oldHighscore = await this._highscores.findOne({_id: new ObjectId(id)});
         if (!oldHighscore) return;
 
@@ -99,7 +99,7 @@ export default class HighscoreService {
      * @return {Promise} Anzahl der gelöschten Datensätze
      */
     async delete(id) {
-        let result = await this._track.deleteOne({_id: new ObjectId(id)});
+        let result = await this._highscores.deleteOne({_id: new ObjectId(id)});
         return result.deletedCount;
     }
 }

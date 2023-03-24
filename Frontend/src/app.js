@@ -42,6 +42,31 @@ class App {
                 url: "^/tracks/(.*)$",
                 show: () => this._gotoListTracks()
             },
+            {
+                url: "^/highscores/(.*)$",
+                show: () => this._gotoListHighscores()
+            },
+            {
+                url: "^/edit-player/(.*)$",
+                show: matches => this._gotoPlayerEdit(matches[1]),
+            },
+            {
+                url: "^/edit-track/(.*)$",
+                show: matches => this._gotoTrackEdit(matches[1]),
+            },
+            {
+                url: "^/edit-highscore/(.*)$",
+                show: matches => this._gotoHighscoreEdit(matches[1]),
+            },
+            {
+                url: "^/highscore-by-track/(.*)$",
+                show: matches => this._gotoHighscoreByTrack(matches[1]),
+            },
+            {
+                url: "^/highscore-by-player/(.*)$",
+                show: matches => this._gotoHighscoreByPlayer(matches[1]),
+            },
+            
         ]);
 
         // Fenstertitel merken, um später den Name der aktuellen Seite anzuhängen
@@ -92,6 +117,82 @@ class App {
             let page = new PageList(this);
             await page.init();
             this._showPage(page, "list-tracks");
+        } catch (ex) {
+            this.showException(ex);
+        }
+    }
+
+    async _gotoListHighscores() {
+        try {
+            // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+            let {default: PageList} = await import("./page-list-highscores/page-list-highscores.js");
+
+            let page = new PageList(this);
+            await page.init();
+            this._showPage(page, "list-highscores");
+        } catch (ex) {
+            this.showException(ex);
+        }
+    }
+
+    async _gotoPlayerEdit(id) {
+        try {
+            // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+            let {default: PageEdit} = await import("./page-edit-player/page-edit-player.js");
+
+            let page = new PageEdit(this, id);
+            await page.init();
+            this._showPage(page, "edit-player");
+        } catch (ex) {
+            this.showException(ex);
+        }
+    }
+    async _gotoTrackEdit(id) {
+        try {
+            // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+            let {default: PageEdit} = await import("./page-edit-track/page-edit-track.js");
+
+            let page = new PageEdit(this, id);
+            await page.init();
+            this._showPage(page, "edit-track");
+        } catch (ex) {
+            this.showException(ex);
+        }
+    }
+    async _gotoHighscoreEdit(id) {
+        try {
+            // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+            let {default: PageEdit} = await import("./page-edit-highscore/page-edit-highscore.js");
+
+            let page = new PageEdit(this, id);
+            await page.init();
+            this._showPage(page, "edit-highscore");
+        } catch (ex) {
+            this.showException(ex);
+        }
+    }
+
+    async _gotoHighscoreByTrack(track_title) {
+        try {
+            // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+            let {default: PageEdit} = await import("./page-list-highscores-by-track/page-list-highscores-by-track.js");
+
+            let page = new PageEdit(this, track_title);
+            await page.init();
+            this._showPage(page, "track-highscore");
+        } catch (ex) {
+            this.showException(ex);
+        }
+    }
+
+    async _gotoHighscoreByPlayer(name) {
+        try {
+            // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+            let {default: PageEdit} = await import("./page-list-highscores-by-player/page-list-highscores-by-player.js");
+
+            let page = new PageEdit(this, name);
+            await page.init();
+            this._showPage(page, "track-highscore");
         } catch (ex) {
             this.showException(ex);
         }

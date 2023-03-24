@@ -1,7 +1,7 @@
 "use strict";
 
 import Page from "../page.js";
-import HtmlTemplate from "/page-list-tracks/page-list-tracks.html";
+import HtmlTemplate from "./page-list-tracks.html";
 
 /**
  * Klasse PageList: Stellt die Listenübersicht zur Verfügung
@@ -59,8 +59,8 @@ export default class PageList extends Page {
             let html = templateHtml;
 
             html = html.replace("$ID$", dataset._id);
-            html = html.replace("$TITLE", dataset.name);
-            html = html.replace("$GAME_VERSION", dataset.skill_level);
+            html = html.replace("$TITLE", dataset.track_title);
+            html = html.replace("$GAME_VERSION", dataset.game_version);
 
 
             // Element in die Liste einfügen
@@ -71,8 +71,10 @@ export default class PageList extends Page {
             olElement.appendChild(liElement);
 
             // Event Handler registrieren
-            liElement.querySelector(".action.edit").addEventListener("click", () => location.hash = `#/edit/${dataset._id}`);
+            liElement.querySelector(".action.edit").addEventListener("click", () => location.hash = `#/edit-track/${dataset._id}`);
             liElement.querySelector(".action.delete").addEventListener("click", () => this._askDelete(dataset._id));
+            liElement.querySelector(".action.showDetails").addEventListener("click", () => location.hash = `#/highscore-by-track/${dataset.track_title}`);
+
         }
     }
 
@@ -89,7 +91,7 @@ export default class PageList extends Page {
 
         // Datensatz löschen
         try {
-            this._app.backend.fetch("DELETE", `/address/${id}`);
+            this._app.backend.fetch("DELETE", `/track/${id}`);
         } catch (ex) {
             this._app.showException(ex);
             return;
