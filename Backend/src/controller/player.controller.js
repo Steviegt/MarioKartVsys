@@ -50,10 +50,6 @@ export default class PlayerController {
         }
     }
 
-    /**
-     * GET /address
-     * Adressen suchen
-     */
     async search(req, res, next) {
         let result = await this._service.search(req.query);
         result.forEach(entity => this._insertHateoasLinks(entity));
@@ -61,10 +57,7 @@ export default class PlayerController {
         return next();
     }
 
-    /**
-     * POST /address
-     * Neue Adresse anlegen
-     */
+
     async create(req, res, next) {
         let result = await this._service.create(req.body);
         this._insertHateoasLinks(result);
@@ -76,10 +69,7 @@ export default class PlayerController {
         return next();
     }
 
-    /**
-     * GET /address/:id
-     * Adresse auslesen
-     */
+
     async read(req, res, next) {
         let result = await this._service.read(req.params.id);
 
@@ -93,11 +83,6 @@ export default class PlayerController {
         return next();
     }
 
-    /**
-     * PUT /address/:id
-     * PATCH /address/:id
-     * Adresse ändern
-     */
     async update(req, res, next) {
         let result = await this._service.update(req.params.id, req.body);
 
@@ -111,10 +96,7 @@ export default class PlayerController {
         return next();
     }
 
-    /**
-     * DELETE /address/:id
-     * Adresse löschen
-     */
+
     async delete(req, res, next) {
         await this._service.delete(req.params.id)
         res.status(204);

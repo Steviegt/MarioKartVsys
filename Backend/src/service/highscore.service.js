@@ -4,9 +4,9 @@ import DatabaseFactory from "../database.js";
 import {ObjectId} from "mongodb";
 
 /**
- * Geschäftslogik zur Verwaltung von Playern. Diese Klasse implementiert die
+ * Geschäftslogik zur Verwaltung von Highscores. Diese Klasse implementiert die
  * eigentliche Anwendungslogik losgelöst vom technischen Übertragungsweg.
- * Die Adressen werden der Einfachheit halber in einer MongoDB abgelegt.
+ * Die Highscores werden der Einfachheit halber in einer MongoDB abgelegt.
  */
 export default class HighscoreService {
     /**
@@ -23,7 +23,7 @@ export default class HighscoreService {
      * Um das Beispiel klein zu halten, wird dies hier aber nicht unterstützt.
      *
      * @param {Object} query Optionale Suchparameter
-     * @return {Promise} Liste der gefundenen Player
+     * @return {Promise} Liste der gefundenen Highscores
      */
     async search(query) {
         let cursor = this._highscores.find(query, {
@@ -38,10 +38,10 @@ export default class HighscoreService {
     }
 
     /**
-     * Speichern eines neuen Players.
+     * Speichern eines neuen Highscores.
      *
-     * @param {Object} highscore Zu speichernde Plyerdaten
-     * @return {Promise} Gespeicherte Playerdaten
+     * @param {Object} highscore Zu speichernde Highscoredaten
+     * @return {Promise} Gespeicherte Highscoredaten
      */
     async create(highscore) {
         highscore = highscore || {};
@@ -57,10 +57,10 @@ export default class HighscoreService {
     }
 
     /**
-     * Auslesen einer vorhandenen Adresse anhand ihrer ID.
+     * Auslesen eines vorhandenen Datensatzes anhand der ID.
      *
-     * @param {String} id ID der gesuchten Adresse
-     * @return {Promise} Gefundene Adressdaten
+     * @param {String} id ID 
+     * @return {Promise} Gefundene Datensätze
      */
     async read(id) {
         let result = await this._highscores.findOne({_id: new ObjectId(id)});
@@ -68,12 +68,12 @@ export default class HighscoreService {
     }
 
     /**
-     * Aktualisierung einer Adresse, durch Überschreiben einzelner Felder
-     * oder des gesamten Adressobjekts (ohne die ID).
+     * Aktualisierung eines Datensatzes, durch Überschreiben einzelner Felder
+     * oder des gesamten Datensatzes (ohne die ID).
      *
-     * @param {String} id ID der gesuchten Adresse
-     * @param {[type]} track Zu speichernde Adressdaten
-     * @return {Promise} Gespeicherte Adressdaten oder undefined
+     * @param {String} id ID des Datensatzes
+     * @param {[type]} track Zu speichernder Datensatz
+     * @return {Promise} Gespeicherter Datensatz oder undefined
      */
     async update(id, highscore) {
         let oldHighscore = await this._highscores.findOne({_id: new ObjectId(id)});
@@ -93,9 +93,9 @@ export default class HighscoreService {
     }
 
     /**
-     * Löschen einer Adresse anhand ihrer ID.
+     * Löschen eines Highscores anhand der ID.
      *
-     * @param {String} id ID der gesuchten Adresse
+     * @param {String} id ID des Datensatzes
      * @return {Promise} Anzahl der gelöschten Datensätze
      */
     async delete(id) {

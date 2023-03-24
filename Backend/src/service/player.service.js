@@ -6,7 +6,7 @@ import {ObjectId} from "mongodb";
 /**
  * Geschäftslogik zur Verwaltung von Playern. Diese Klasse implementiert die
  * eigentliche Anwendungslogik losgelöst vom technischen Übertragungsweg.
- * Die Adressen werden der Einfachheit halber in einer MongoDB abgelegt.
+ * Die Player werden der Einfachheit halber in einer MongoDB abgelegt.
  */
 export default class PlayerService {
     /**
@@ -39,7 +39,7 @@ export default class PlayerService {
     /**
      * Speichern eines neuen Players.
      *
-     * @param {Object} player Zu speichernde Plyerdaten
+     * @param {Object} player Zu speichernde Playerdaten
      * @return {Promise} Gespeicherte Playerdaten
      */
     async create(player) {
@@ -55,10 +55,10 @@ export default class PlayerService {
     }
 
     /**
-     * Auslesen einer vorhandenen Adresse anhand ihrer ID.
+     * Auslesen eines vorhandenen Datensätze anhand der ID.
      *
-     * @param {String} id ID der gesuchten Adresse
-     * @return {Promise} Gefundene Adressdaten
+     * @param {String} id ID der gesuchten Daten
+     * @return {Promise} Gefundene Daten
      */
     async read(id) {
         let result = await this._player.findOne({_id: new ObjectId(id)});
@@ -66,12 +66,12 @@ export default class PlayerService {
     }
 
     /**
-     * Aktualisierung einer Adresse, durch Überschreiben einzelner Felder
-     * oder des gesamten Adressobjekts (ohne die ID).
+     * Aktualisierung eines Datensatzes, durch Überschreiben einzelner Felder
+     * oder des gesamten Datensatzes (ohne die ID).
      *
-     * @param {String} id ID der gesuchten Adresse
-     * @param {[type]} player Zu speichernde Adressdaten
-     * @return {Promise} Gespeicherte Adressdaten oder undefined
+     * @param {String} id ID 
+     * @param {[type]} player Zu speichernder Datensatz
+     * @return {Promise} Gespeicherte Datensätze oder undefined
      */
     async update(id, player) {
         let oldPlayer = await this._player.findOne({_id: new ObjectId(id)});
@@ -90,9 +90,9 @@ export default class PlayerService {
     }
 
     /**
-     * Löschen einer Adresse anhand ihrer ID.
+     * Löschen eines Datensatzes anhand der ID.
      *
-     * @param {String} id ID der gesuchten Adresse
+     * @param {String} id ID 
      * @return {Promise} Anzahl der gelöschten Datensätze
      */
     async delete(id) {

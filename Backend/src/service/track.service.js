@@ -4,9 +4,9 @@ import DatabaseFactory from "../database.js";
 import {ObjectId} from "mongodb";
 
 /**
- * Geschäftslogik zur Verwaltung von Playern. Diese Klasse implementiert die
+ * Geschäftslogik zur Verwaltung von Tracks. Diese Klasse implementiert die
  * eigentliche Anwendungslogik losgelöst vom technischen Übertragungsweg.
- * Die Adressen werden der Einfachheit halber in einer MongoDB abgelegt.
+ * Die Tracks werden der Einfachheit halber in einer MongoDB abgelegt.
  */
 export default class TrackService {
     /**
@@ -17,7 +17,7 @@ export default class TrackService {
     }
 
     /**
-     * Player suchen. Unterstützt wird lediglich eine ganz einfache Suche,
+     * Track suchen. Unterstützt wird lediglich eine ganz einfache Suche,
      * bei der einzelne Felder auf exakte Übereinstimmung geprüft werden.
      * Zwar unterstützt MongoDB prinzipiell beliebig komplexe Suchanfragen.
      * Um das Beispiel klein zu halten, wird dies hier aber nicht unterstützt.
@@ -37,10 +37,10 @@ export default class TrackService {
     }
 
     /**
-     * Speichern eines neuen Players.
+     * Speichern eines neuen Tracks.
      *
-     * @param {Object} track Zu speichernde Plyerdaten
-     * @return {Promise} Gespeicherte Playerdaten
+     * @param {Object} track Zu speichernde Trackdaten
+     * @return {Promise} Gespeicherte Trackdaten
      */
     async create(track) {
         track = track || {};
@@ -55,10 +55,10 @@ export default class TrackService {
     }
 
     /**
-     * Auslesen einer vorhandenen Adresse anhand ihrer ID.
+     * Auslesen eines vorhandenen Datensatzes anhand der ID.
      *
-     * @param {String} id ID der gesuchten Adresse
-     * @return {Promise} Gefundene Adressdaten
+     * @param {String} id ID 
+     * @return {Promise} Gefundene Daten
      */
     async read(id) {
         let result = await this._track.findOne({_id: new ObjectId(id)});
@@ -66,12 +66,12 @@ export default class TrackService {
     }
 
     /**
-     * Aktualisierung einer Adresse, durch Überschreiben einzelner Felder
-     * oder des gesamten Adressobjekts (ohne die ID).
+     * Aktualisierung eines Tracks, durch Überschreiben einzelner Felder
+     * oder des gesamten Trackobjekts (ohne die ID).
      *
-     * @param {String} id ID der gesuchten Adresse
-     * @param {[type]} track Zu speichernde Adressdaten
-     * @return {Promise} Gespeicherte Adressdaten oder undefined
+     * @param {String} id ID des gesuchten Tracks
+     * @param {[type]} track Zu speichernde Trackdaten
+     * @return {Promise} Gespeicherte Trackdaten oder undefined
      */
     async update(id, track) {
         let oldTrack = await this._track.findOne({_id: new ObjectId(id)});
@@ -90,9 +90,9 @@ export default class TrackService {
     }
 
     /**
-     * Löschen einer Adresse anhand ihrer ID.
+     * Löschen eines Tracks anhand der ID.
      *
-     * @param {String} id ID der gesuchten Adresse
+     * @param {String} id ID der gesuchten Daten
      * @return {Promise} Anzahl der gelöschten Datensätze
      */
     async delete(id) {

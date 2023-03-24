@@ -14,7 +14,8 @@
 /* ALLGEMEINES */
 
 
-html, body {
+html,
+body {
     padding: 0;
     margin: 0;
 }
@@ -48,7 +49,7 @@ html {
         margin-bottom: 2em;
 
         border: 1px solid #202020;
-        box-shadow: 1px 1px 3px rgba(0,0,0, 0.5);
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 
     }
 }
@@ -84,12 +85,20 @@ nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
-    margin-bottom: -3px;
     text-align: center;
+    margin-bottom: -3px;
 
     display: flex;
-    justify-content:center;
+    justify-content: center;
 
+    border: 0px solid #404040;
+    border-bottom-width: 3px;
+
+}
+
+nav li {
+    border: 0px solid #404040;
+    border-bottom-width: 3px;
 }
 
 nav li.active {
@@ -106,19 +115,19 @@ nav li:hover {
 }
 
 .menubarcontainer {
-    display:flex;
+    display: flex;
     justify-content: space-between;
     padding: 1em;
-    
+
 }
 
-.icon{
+.icon {
     font-size: 300%;
     text-align: center;
 
 }
 
-footer{
+footer {
     text-align: center;
 
     background-color: #404040;
@@ -126,4 +135,18 @@ footer{
 
     border: 0px solid #202020;
     border-bottom-width: 3px;
+}
+
+a:link {
+    color: #ffffff;
+}
+
+/* visited link */
+a:visited {
+    color: #ffffff;
+}
+
+/* mouse over link */
+a:hover {
+    color: #ffcc00;
 }

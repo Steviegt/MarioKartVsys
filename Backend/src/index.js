@@ -94,7 +94,6 @@ const openApiEnforcer = await OpenApiEnforcer(openApiFile, {
 server.use(OpenApiEnforcerMiddleware(openApiEnforcer));
 
 // HTTP-Controller registrieren
-//// TODO: Weitere Controller-Klassen hinzufügen ////
 new RootController(server, "/");
 new PlayerController(server, "/player");
 new TrackController(server, "/track");
@@ -103,11 +102,18 @@ new HighscoreController(server, "/highscore");
 
 // Server tatsächlich starten
 server.listen(config.port, config.host, function() {
-    //// TODO: Konsolenausgabe anpassen (Name des Services usw.) ////
     console.log();
-    console.log("=============");
+    console.log("=======================");
     console.log("Mario Kart Highscore");
-    console.log("=============");
+    console.log("=======================");
+    console.log();
+    console.log("=======================================================");
+    console.log("By Xena Raquet, Vinzent von Benthen, Stefan Geiselhart");
+    console.log("=======================================================");
+    console.log();
+    console.log("=======================================================");
+    console.log("Entwicklung verteilter Systeme (DHBW Karlsruhe 2023)");
+    console.log("=======================================================");
     console.log();
     console.log("Ausführung mit folgender Konfiguration:");
     console.log();
