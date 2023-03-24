@@ -7,11 +7,13 @@
  * stattdessen in das jeweilige Stylesheet.
  */
 
-/**** TODO: Stylesheet überarbeiten ****/
+
 
 @import url('https://fonts.googleapis.com/css?family=Rubik');
 
 /* ALLGEMEINES */
+
+
 html, body {
     padding: 0;
     margin: 0;
@@ -62,6 +64,8 @@ nav {
     border-bottom-width: 3px;
 }
 
+
+
 nav a,
 nav a:visited,
 nav a:hover {
@@ -84,17 +88,42 @@ nav ul {
     text-align: center;
 
     display: flex;
+    justify-content:center;
+
 }
 
 nav li.active {
     background-color: #333333;
-    border: 0px solid rgb(33, 146, 187);
+    border: 0px solid #e0102f;
     border-bottom-width: 3px;
 }
 
 nav li:hover {
     background-color: #505050;
 
-    border: 0px solid rgb(103, 197, 231);
+    border: 0px solid #08a936;
+    border-bottom-width: 3px;
+}
+
+.menubarcontainer {
+    display:flex;
+    justify-content: space-between;
+    padding: 1em;
+    
+}
+
+.icon{
+    font-size: 300%;
+    text-align: center;
+
+}
+
+footer{
+    text-align: center;
+
+    background-color: #404040;
+    color: white;
+
+    border: 0px solid #202020;
     border-bottom-width: 3px;
 }

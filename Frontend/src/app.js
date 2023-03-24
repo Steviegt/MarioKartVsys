@@ -21,19 +21,9 @@ class App {
         this.backend = new Backend();
 
         // Single Page Router zur Steuerung der sichtbaren Inhalte
-        //// TODO: Routing-Regeln anpassen und ggf. neue Methoden anlegen ////
+
         this.router = new Router([
-            /*{
-                url: "^/$",
-                show: () => this._gotoListPlayer()
-            },
-            */
-            //// TODO: Eigene Routing-Regeln hier in der Mitte einfügen ////
-            /*{
-                url: ".*",
-                show: () => this._gotoListPlayer()
-            },
-            */
+ 
             {
                 url: "^/player/(.*)$",
                 show: () => this._gotoListPlayer()
@@ -217,7 +207,12 @@ class App {
 
         // Sichtbaren Hauptinhalt austauschen
         this._bodyElement.querySelector("main")?.remove();
-        this._bodyElement.appendChild(page.mainElement);
+        this._bodyElement.append(page.mainElement)
+
+        //Footer anbauen
+        let footer = this._bodyElement.querySelector("footer")
+        footer.remove
+        this._bodyElement.append(footer)
     }
 
     /**

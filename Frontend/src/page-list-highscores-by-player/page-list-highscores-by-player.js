@@ -20,21 +20,6 @@ export default class PageList extends Page {
         this._highscoreName = name;
     }
 
-    /**
-     * HTML-Inhalt und anzuzeigende Daten laden.
-     *
-     * HINWEIS: Durch die geerbte init()-Methode wird `this._mainElement` mit
-     * dem <main>-Element aus der nachgeladenen HTML-Datei versorgt. Dieses
-     * Element wird dann auch von der App-Klasse verwendet, um die Seite
-     * anzuzeigen. Hier muss daher einfach mit dem üblichen DOM-Methoden
-     * `this._mainElement` nachbearbeitet werden, um die angezeigten Inhalte
-     * zu beeinflussen.
-     *
-     * HINWEIS: In dieser Version der App wird mit dem üblichen DOM-Methoden
-     * gearbeitet, um den finalen HTML-Code der Seite zu generieren. In größeren
-     * Apps würde man ggf. eine Template Engine wie z.B. Nunjucks integrieren
-     * und den JavaScript-Code dadurch deutlich vereinfachen.
-     */
     async init() {
         // HTML-Inhalt nachladen
         await super.init();
@@ -46,9 +31,9 @@ export default class PageList extends Page {
 
         let newData = []
         this._highscoreName = this._highscoreName.replaceAll("%20", " ")
-        for(let index in data){
-            let dataset = data[index]        
-            if(dataset.name == this._highscoreName){
+        for (let index in data) {
+            let dataset = data[index]
+            if (dataset.name == this._highscoreName) {
                 newData.push(dataset)
             }
         }
@@ -61,8 +46,8 @@ export default class PageList extends Page {
         if (data.length) {
             this._emptyMessageElement.classList.add("hidden");
         }
-       
-       
+
+
 
         // Je Datensatz einen Listeneintrag generieren
         let olElement = this._mainElement.querySelector("ol");
@@ -75,8 +60,8 @@ export default class PageList extends Page {
             // Platzhalter ersetzen
             let dataset = data[index];
             let html = templateHtml;
-            html = html.replace("$ID$",dataset._id);
-            html = html.replace("$NAME",dataset.name)
+            html = html.replace("$ID$", dataset._id);
+            html = html.replace("$NAME", dataset.name)
             html = html.replace("$TRACK_TITLE", dataset.track);
             html = html.replace("$TIME", dataset.time);
 
@@ -93,16 +78,15 @@ export default class PageList extends Page {
             liElement.querySelector(".action.delete").addEventListener("click", () => this._askDelete(dataset._id));
         }
     }
-
     /**
-     * Löschen der übergebenen Adresse. Zeigt einen Popup, ob der Anwender
-     * die Adresse löschen will und löscht diese dann.
-     *
-     * @param {Integer} id ID des zu löschenden Datensatzes
-     */
+        * Löschen des übergebenen Highscores. Zeigt einen Popup, ob der Anwender
+        * den Highscore löschen will und löscht diese dann.
+        *
+        * @param {Integer} id ID des zu löschenden Datensatzes
+        */
     async _askDelete(id) {
         // Sicherheitsfrage zeigen
-        let answer = confirm("Soll die ausgewählte Adresse wirklich gelöscht werden?");
+        let answer = confirm("Soll der ausgewählte Highscore wirklich gelöscht werden?");
         if (!answer) return;
 
         // Datensatz löschen
@@ -124,12 +108,12 @@ export default class PageList extends Page {
     }
     dynamicSort(property) {
         var sortOrder = 1;
-        if(property[0] === "-") {
+        if (property[0] === "-") {
             sortOrder = -1;
             property = property.substr(1);
         }
-        return function (a,b) {
-        
+        return function (a, b) {
+
             var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
             return result * sortOrder;
         }

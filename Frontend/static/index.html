@@ -1,57 +1,65 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <!-- TODO: Titel ändern -->
-        <title>Mario Kart Highscores</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Mit esbuild erzeugte Bundles aus allen JS/CSS-Dateien -->
-        <script src="app.js" type="module"></script>
-        <link rel="stylesheet" href="app.css" />
+<head>
+    <meta charset="utf-8" />
+    <!-- TODO: Titel ändern -->
+    <title>Mario Kart Highscores</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Dummy-Element für dynamisch nachgeladene CSS-Anweisungen -->
-        <style id="page-css"></style>
+    <!-- Mit esbuild erzeugte Bundles aus allen JS/CSS-Dateien -->
+    <script src="app.js" type="module"></script>
+    <link rel="stylesheet" href="app.css" />
 
-        <!-- https://pixabay.com/vectors/phone-call-telephone-651704/ -->
-        <link rel="shortcut icon" href="favicon.svg" />
-    </head>
-    <body>
-        <!-- Kopfbereich mit Tabreitern -->
-        <nav id="app-menu">
-            <!-- TODO: Menü anpassen -->
-            <ul>
-                <li data-page-name="list-player">
-                    <a href="#/player/">Player</a>
-                </li>
-                <li data-page-name="list-tracks">
-                    <a href="#/tracks/">Track</a>
-                </li>
-                <li data-page-name="list-highscores">
-                    <a href="#/highscores/">Highscores</a>
-                </li>
-            </ul>
-            <ul>
-                <li data-page-name="new-player">
-                    <a href="#/edit-player/">new Player</a>
-                </li>
-                <li data-page-name="new-track">
-                    <a href="#/edit-track/">new Track</a>
-                </li>
-                <li data-page-name="new-highscore">
-                    <a href="#/edit-highscore/">new Highscores</a>
-                </li>
-                <!--
-                <li data-page-name="new">
-                    <a href="#/new">+</a>
-                </li>
-            -->
-            </ul>
-        </nav>
+    <!-- Dummy-Element für dynamisch nachgeladene CSS-Anweisungen -->
+    <style id="page-css"></style>
 
-        <!--
-            Der Inhalt der aktuellen Seite wird hier mit JavaScript
-            zur Laufzeit als <main>-Element eingebunden.
-        -->
-    </body>
+    <!-- https://pixabay.com/vectors/phone-call-telephone-651704/ -->
+    <link rel="shortcut icon" href="favicon.svg" />
+</head>
+
+<body>
+    <!-- Kopfbereich mit Tabreitern -->
+    <nav id="app-menu">
+        <div class="menubarcontainer">
+            <div class="icon">
+                🏁
+            </div>
+            <div class="menubar">
+                <ul>
+                    <li data-page-name="list-player">
+                        <a href="#/player/">Player</a>
+                    </li>
+                    <li data-page-name="list-tracks">
+                        <a href="#/tracks/">Track</a>
+                    </li>
+                    <li data-page-name="list-highscores">
+                        <a href="#/highscores/">Highscores</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li data-page-name="new-player">
+                        <a href="#/edit-player/">new Player</a>
+                    </li>
+                    <li data-page-name="new-track">
+                        <a href="#/edit-track/">new Track</a>
+                    </li>
+                    <li data-page-name="new-highscore">
+                        <a href="#/edit-highscore/">new Highscores</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="icon">
+                🏁
+            </div>
+        </div>
+    </nav>
+
+</body>
+
+<footer>
+    <div> Entstanden im Rahmen der Vorlesung "Entwicklung verteilter Systeme" </div>
+    <div> Xena Raquet, Vinzent von Benthen, Stefan Geiselhart </div>
+</footer>
+
 </html>

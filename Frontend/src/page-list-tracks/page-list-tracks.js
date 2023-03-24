@@ -18,21 +18,7 @@ export default class PageList extends Page {
         this._emptyMessageElement = null;
     }
 
-    /**
-     * HTML-Inhalt und anzuzeigende Daten laden.
-     *
-     * HINWEIS: Durch die geerbte init()-Methode wird `this._mainElement` mit
-     * dem <main>-Element aus der nachgeladenen HTML-Datei versorgt. Dieses
-     * Element wird dann auch von der App-Klasse verwendet, um die Seite
-     * anzuzeigen. Hier muss daher einfach mit dem üblichen DOM-Methoden
-     * `this._mainElement` nachbearbeitet werden, um die angezeigten Inhalte
-     * zu beeinflussen.
-     *
-     * HINWEIS: In dieser Version der App wird mit dem üblichen DOM-Methoden
-     * gearbeitet, um den finalen HTML-Code der Seite zu generieren. In größeren
-     * Apps würde man ggf. eine Template Engine wie z.B. Nunjucks integrieren
-     * und den JavaScript-Code dadurch deutlich vereinfachen.
-     */
+
     async init() {
         // HTML-Inhalt nachladen
         await super.init();
@@ -72,21 +58,22 @@ export default class PageList extends Page {
 
             // Event Handler registrieren
             liElement.querySelector(".action.edit").addEventListener("click", () => location.hash = `#/edit-track/${dataset._id}`);
-            liElement.querySelector(".action.delete").addEventListener("click", () => this._askDelete(dataset._id));
+            liElement.querySelector(".action.delete").addEventListener("click", () => this._askDelete(dataset._id, dataset._title));
             liElement.querySelector(".action.showDetails").addEventListener("click", () => location.hash = `#/highscore-by-track/${dataset.track_title}`);
 
         }
     }
 
     /**
-     * Löschen der übergebenen Adresse. Zeigt einen Popup, ob der Anwender
-     * die Adresse löschen will und löscht diese dann.
+     * Löschen der übergebenen Strecke. Zeigt einen Popup, ob der Anwender
+     * die Strecke löschen will und löscht diese dann.
      *
      * @param {Integer} id ID des zu löschenden Datensatzes
+     * @param {String} title Name des zu löschenden Datensatzes
      */
     async _askDelete(id) {
         // Sicherheitsfrage zeigen
-        let answer = confirm("Soll die ausgewählte Adresse wirklich gelöscht werden?");
+        let answer = confirm("Soll die ausgewählte Strecke wirklich gelöscht werden? \n"+ this.title);
         if (!answer) return;
 
         // Datensatz löschen
