@@ -25,10 +25,7 @@ export default class PageEdit extends Page {
             skill_level: ""
         };
 
-        this._playerData = {
-            name: "",
-            skill_level: ""
-        };
+        this._playerData = [];
 
 
 
