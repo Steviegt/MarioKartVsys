@@ -97,6 +97,10 @@ paths:
         required: true
       responses:
         "202":
+          content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/highscore'
           description: Successful response.
       operationId: updatehighscore
       summary: Update a highscore
@@ -193,6 +197,10 @@ paths:
         required: true
       responses:
         "202":
+          content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/player'
           description: Successful response.
       operationId: updateplayer
       summary: Update a player
@@ -304,6 +312,10 @@ paths:
         required: true
       responses:
         "202":
+          content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/track'
           description: Successful response.
       operationId: updatetrack
       summary: Update a track
@@ -336,9 +348,6 @@ components:
         _links:
           $ref: '#/components/schemas/PLAYER_Resource'
           description: ""
-      example:
-        name: Vinzent von Benthen
-        skill_level: Pro
     track:
       title: Root Type for track
       description: Strecke
@@ -351,9 +360,7 @@ components:
         _link:
           $ref: '#/components/schemas/TRACK_Resource'
           description: ""
-      example:
-        track_title: Rainbow Road
-        game_version: Mario Kart 8 deluxe
+
     highscore:
       title: Root Type for highscore
       description: Bestzeit einer bestimmten Strecke
@@ -368,10 +375,6 @@ components:
           description: ""
         track_titel:
           type: string
-      example:
-        name: Vinzent von Benthen
-        track: Rainbow Road
-        time: 00:01:03
     PLAYER_Link:
       title: Root Type for HATEOAS_Link
       description: HATEOAS-Link
@@ -385,12 +388,6 @@ components:
           type: array
           items:
             type: string
-      example:
-        url: /player
-        method: GET
-        query_params:
-        - name
-        - skill_level
     PLAYER_Collection:
       title: Root Type for HATEOAS_Collection
       description: HATEOAS-Link einer Collection
@@ -402,10 +399,7 @@ components:
           $ref: '#/components/schemas/PLAYER_Link'
         create:
           $ref: '#/components/schemas/PLAYER_Link'
-      example:
-        _name: player
-        query: ""
-        create: ""
+
     HIGHSCORE_Link:
       title: Root Type for HIGHSCORE_Link
       description: HATEOAS-Link für Highscore
@@ -419,13 +413,7 @@ components:
           type: array
           items:
             type: string
-      example:
-        url: /highscore
-        method: GET
-        query_params:
-        - name
-        - track
-        - time
+
     TRACK_Link:
       title: Root Type for TRACK_Link
       description: HATEOAS-Link für Track
@@ -439,12 +427,7 @@ components:
           type: array
           items:
             type: string
-      example:
-        url: /track
-        method: GET
-        query_params:
-        - track_title
-        - game_version
+
     PLAYER_Resource:
       title: Root Type for HATEOAS_Resource
       description: HATEOAS_Link einer Resource
@@ -458,11 +441,6 @@ components:
           $ref: '#/components/schemas/PLAYER_Link'
         delete:
           $ref: '#/components/schemas/PLAYER_Link'
-      example:
-        read: ""
-        update: ""
-        patch: ""
-        delete: ""
     HIGHSCORE_Resource:
       title: Root Type for HIGHSCORE_Resource
       description: ""
@@ -476,11 +454,6 @@ components:
           $ref: '#/components/schemas/HIGHSCORE_Link'
         delete:
           $ref: '#/components/schemas/HIGHSCORE_Link'
-      example:
-        read: ""
-        update: ""
-        patch: ""
-        delete: ""
     TRACK_Resource:
       title: Root Type for TRACK_Resource
       description: ""
@@ -494,11 +467,7 @@ components:
           $ref: '#/components/schemas/TRACK_Link'
         delete:
           $ref: '#/components/schemas/TRACK_Link'
-      example:
-        read: ""
-        update: ""
-        patch: ""
-        delete: ""
+
     TRACK_Collection:
       title: Root Type for TRACK_Collection
       description: ""
@@ -510,10 +479,7 @@ components:
           $ref: '#/components/schemas/TRACK_Link'
         create:
           $ref: '#/components/schemas/TRACK_Link'
-      example:
-        _name: track
-        query: ""
-        create: ""
+
     HIGHSCORE_Collection:
       title: Root Type for HIGHSCORE_Collection
       description: ""
@@ -525,10 +491,7 @@ components:
           $ref: '#/components/schemas/HIGHSCORE_Link'
         create:
           $ref: '#/components/schemas/HIGHSCORE_Link'
-      example:
-        _name: highscore
-        query: ""
-        create: ""
+
 tags:
 - name: player
   description: Spieler
