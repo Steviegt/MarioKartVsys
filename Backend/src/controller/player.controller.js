@@ -87,6 +87,7 @@ export default class PlayerController {
         let result = await this._service.update(req.params.id, req.body);
 
         if (result) {
+            res.status(202)
             this._insertHateoasLinks(result);
             res.sendResult(result);
         } else {

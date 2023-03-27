@@ -74,7 +74,7 @@ export default class HighscoreController {
 
     async read(req, res, next) {
         let result = await this._service.read(req.params.id);
-
+        
         if (result) {
             this._insertHateoasLinks(result);
             res.sendResult(result);
@@ -90,6 +90,7 @@ export default class HighscoreController {
 
         if (result) {
             this._insertHateoasLinks(result);
+            res.status(202)
             res.sendResult(result);
         } else {
             throw new RestifyError.NotFoundError("Player nicht gefunden");
