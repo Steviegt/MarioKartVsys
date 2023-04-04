@@ -103,9 +103,9 @@ new HighscoreController(server, "/highscore");
 // Server tatsächlich starten
 server.listen(config.port, config.host, function() {
     console.log();
-    console.log("=======================");
-    console.log("Mario Kart Highscore");
-    console.log("=======================");
+    console.log("=======================================================");
+    console.log("               Mario Kart Highscore");
+    console.log("=======================================================");
     console.log();
     console.log("=======================================================");
     console.log("By Xena Raquet, Vinzent von Benthen, Stefan Geiselhart");
@@ -115,6 +115,10 @@ server.listen(config.port, config.host, function() {
     console.log("Entwicklung verteilter Systeme (DHBW Karlsruhe 2023)");
     console.log("=======================================================");
     console.log();
+    console.log("=======================================================");
+    console.log("  Vorlage von Dennis Schulmeister-Zimolong (wpvs.de)");
+    console.log("=======================================================");
+    console.log()
     console.log("Ausführung mit folgender Konfiguration:");
     console.log();
     console.log(config);

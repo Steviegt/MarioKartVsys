@@ -15,6 +15,8 @@ paths:
       \ entities.  This path contains a `GET` and `POST` operation to perform the\
       \ list and create tasks, respectively."
     get:
+      tags:
+      - highscore
       responses:
         "200":
           content:
@@ -24,9 +26,20 @@ paths:
                 items:
                   $ref: '#/components/schemas/highscore'
           description: Successful response - returns an array of `highscore` entities.
+      deprecated: false
       operationId: gethighscores
       summary: List All highscores
       description: Gets a list of all `highscore` entities.
+    put:
+      tags:
+      - highscore
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/highscore'
+          description: Accepted
     post:
       requestBody:
         description: A new `highscore` to be created.
@@ -35,19 +48,27 @@ paths:
             schema:
               $ref: '#/components/schemas/highscore'
         required: true
+      tags:
+      - highscore
       responses:
         "201":
           description: Successful response.
+          headers:
+            Location:
+              schema:
+                type: string
       operationId: createhighscore
       summary: Create a highscore
       description: Creates a new instance of a `highscore`.
     patch:
       requestBody:
-        description: Zu ändernde Felder
+        description: Zu ändernde Fehlder
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/highscore'
+      tags:
+      - highscore
       responses:
         "200":
           content:
@@ -62,7 +83,7 @@ paths:
         type: string
       in: query
     - name: time
-      description: Zeit die gebraucht wurde
+      description: Zeit die gbraucht wurde
       schema:
         type: string
       in: query
@@ -97,10 +118,6 @@ paths:
         required: true
       responses:
         "202":
-          content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/highscore'
           description: Successful response.
       operationId: updatehighscore
       summary: Update a highscore
@@ -123,6 +140,8 @@ paths:
     summary: Path used to manage the list of players.
     description: "Hier können Spieler gesucht, aufgelistet und angelegt werden."
     get:
+      tags:
+      - player
       responses:
         "200":
           content:
@@ -135,6 +154,16 @@ paths:
       operationId: getplayers
       summary: List All players
       description: Gets a list of all `player` entities.
+    put:
+      tags:
+      - player
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/player'
+          description: Accepted
     post:
       requestBody:
         description: A new `player` to be created.
@@ -143,9 +172,15 @@ paths:
             schema:
               $ref: '#/components/schemas/player'
         required: true
+      tags:
+      - player
       responses:
         "201":
           description: Successful response.
+          headers:
+            Location:
+              schema:
+                type: string
       operationId: createplayer
       summary: Create a player
       description: Creates a new instance of a `player`.
@@ -156,6 +191,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/player'
+      tags:
+      - player
       responses:
         "200":
           description: OK
@@ -197,10 +234,6 @@ paths:
         required: true
       responses:
         "202":
-          content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/player'
           description: Successful response.
       operationId: updateplayer
       summary: Update a player
@@ -239,6 +272,8 @@ paths:
       \ entities.  This path contains a `GET` and `POST` operation to perform the\
       \ list and create tasks, respectively."
     get:
+      tags:
+      - track
       responses:
         "200":
           content:
@@ -251,6 +286,16 @@ paths:
       operationId: gettracks
       summary: List All tracks
       description: Gets a list of all `track` entities.
+    put:
+      tags:
+      - track
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/track'
+          description: Accepted
     post:
       requestBody:
         description: A new `track` to be created.
@@ -259,9 +304,15 @@ paths:
             schema:
               $ref: '#/components/schemas/track'
         required: true
+      tags:
+      - track
       responses:
         "201":
           description: Successful response.
+          headers:
+            Location:
+              schema:
+                type: string
       operationId: createtrack
       summary: Create a track
       description: Creates a new instance of a `track`.
@@ -272,6 +323,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/track'
+      tags:
+      - track
       responses:
         "200":
           description: OK
@@ -312,10 +365,6 @@ paths:
         required: true
       responses:
         "202":
-          content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/track'
           description: Successful response.
       operationId: updatetrack
       summary: Update a track
@@ -360,7 +409,6 @@ components:
         _link:
           $ref: '#/components/schemas/TRACK_Resource'
           description: ""
-
     highscore:
       title: Root Type for highscore
       description: Bestzeit einer bestimmten Strecke
@@ -399,7 +447,6 @@ components:
           $ref: '#/components/schemas/PLAYER_Link'
         create:
           $ref: '#/components/schemas/PLAYER_Link'
-
     HIGHSCORE_Link:
       title: Root Type for HIGHSCORE_Link
       description: HATEOAS-Link für Highscore
@@ -413,7 +460,6 @@ components:
           type: array
           items:
             type: string
-
     TRACK_Link:
       title: Root Type for TRACK_Link
       description: HATEOAS-Link für Track
@@ -427,7 +473,6 @@ components:
           type: array
           items:
             type: string
-
     PLAYER_Resource:
       title: Root Type for HATEOAS_Resource
       description: HATEOAS_Link einer Resource
@@ -467,7 +512,6 @@ components:
           $ref: '#/components/schemas/TRACK_Link'
         delete:
           $ref: '#/components/schemas/TRACK_Link'
-
     TRACK_Collection:
       title: Root Type for TRACK_Collection
       description: ""
@@ -479,7 +523,6 @@ components:
           $ref: '#/components/schemas/TRACK_Link'
         create:
           $ref: '#/components/schemas/TRACK_Link'
-
     HIGHSCORE_Collection:
       title: Root Type for HIGHSCORE_Collection
       description: ""
@@ -491,7 +534,6 @@ components:
           $ref: '#/components/schemas/HIGHSCORE_Link'
         create:
           $ref: '#/components/schemas/HIGHSCORE_Link'
-
 tags:
 - name: player
   description: Spieler

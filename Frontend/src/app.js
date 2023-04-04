@@ -55,6 +55,9 @@ class App {
             {
                 url: "^/highscore-by-player/(.*)$",
                 show: matches => this._gotoHighscoreByPlayer(matches[1]),
+            },{
+                url: "^/(.*)$",
+                show: () => this._gotoListHighscores()
             },
             
         ]);
